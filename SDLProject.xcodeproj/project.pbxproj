@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4CE04F5523F911CD00569855 /* fireball.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 4CE04F5423F911A600569855 /* fireball.png */; };
+		4CE04F5723F9287E00569855 /* mario.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 4CE04F5623F9287800569855 /* mario.png */; };
+		4CE04F5E23F9CB5900569855 /* mushroom.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 4CE04F5D23F9CB5400569855 /* mushroom.png */; };
 		DBDF1B532323DE3F007CECB1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBDF1B522323DE3F007CECB1 /* main.cpp */; };
 		DBDF1B5E2323DE8D007CECB1 /* ShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBDF1B5D2323DE8D007CECB1 /* ShaderProgram.cpp */; };
 		DBDF1B612323DE9E007CECB1 /* shaders in Copy Files */ = {isa = PBXBuildFile; fileRef = DBDF1B5C2323DE8D007CECB1 /* shaders */; };
@@ -27,6 +29,8 @@
 			files = (
 				DBDF1B612323DE9E007CECB1 /* shaders in Copy Files */,
 				4CE04F5523F911CD00569855 /* fireball.png in Copy Files */,
+				4CE04F5723F9287E00569855 /* mario.png in Copy Files */,
+				4CE04F5E23F9CB5900569855 /* mushroom.png in Copy Files */,
 			);
 			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -35,6 +39,8 @@
 
 /* Begin PBXFileReference section */
 		4CE04F5423F911A600569855 /* fireball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fireball.png; sourceTree = "<group>"; };
+		4CE04F5623F9287800569855 /* mario.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mario.png; sourceTree = "<group>"; };
+		4CE04F5D23F9CB5400569855 /* mushroom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mushroom.png; sourceTree = "<group>"; };
 		DBDF1B4F2323DE3F007CECB1 /* SDLProject */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SDLProject; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBDF1B522323DE3F007CECB1 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		DBDF1B592323DE8D007CECB1 /* ShaderProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderProgram.h; sourceTree = "<group>"; };
@@ -85,6 +91,8 @@
 		DBDF1B512323DE3F007CECB1 /* SDLProject */ = {
 			isa = PBXGroup;
 			children = (
+				4CE04F5623F9287800569855 /* mario.png */,
+				4CE04F5D23F9CB5400569855 /* mushroom.png */,
 				4CE04F5423F911A600569855 /* fireball.png */,
 				DBDF1B5B2323DE8D007CECB1 /* glm */,
 				DBDF1B5D2323DE8D007CECB1 /* ShaderProgram.cpp */,
