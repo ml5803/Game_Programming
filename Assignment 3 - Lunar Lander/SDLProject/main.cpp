@@ -17,7 +17,7 @@
 #include "Entity.h"
 #include <vector>
 
-#define PLATFORM_COUNT 25
+#define PLATFORM_COUNT 27
 struct GameState {
     Entity *player;
     Entity *platforms;
@@ -86,6 +86,7 @@ void DrawText(ShaderProgram *program, GLuint fontTextureID, std::string text, fl
         });
 
     } // end of for loop
+    glBindTexture(GL_TEXTURE_2D, fontTextureID);
     
     glm::mat4 modelMatrix = glm::mat4(1.0f);
     modelMatrix = glm::translate(modelMatrix, position);
@@ -108,7 +109,7 @@ void DrawText(ShaderProgram *program, GLuint fontTextureID, std::string text, fl
 
 void Initialize() {
     SDL_Init(SDL_INIT_VIDEO);
-    displayWindow = SDL_CreateWindow("Textured!", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_OPENGL);
+    displayWindow = SDL_CreateWindow("Lunar Lander!", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_OPENGL);
     SDL_GLContext context = SDL_GL_CreateContext(displayWindow);
     SDL_GL_MakeCurrent(displayWindow, context);
     
@@ -148,7 +149,7 @@ void Initialize() {
     state.player->height = 0.4f;
     state.player->width = 0.5f;
     
-    state.player->jumpPower = 5.0f;
+    state.player->boostPower = 5.0f;
  
     state.platforms = new Entity[PLATFORM_COUNT];
     
@@ -219,8 +220,18 @@ void Initialize() {
     state.platforms[24].textureID = landingTextureID;
     state.platforms[24].position = glm::vec3(1.5,-3.25,0);
     
-    for (int i = 22; i < PLATFORM_COUNT; i++){
+    for (int i = 22; i < 25; i++){
         state.platforms[i].entityType = LANDING;
+    }
+    
+    //additional obstacles
+    state.platforms[25].textureID = platformTextureID;
+    state.platforms[25].position = glm::vec3(-2,0,0);
+    state.platforms[26].textureID = platformTextureID;
+    state.platforms[26].position = glm::vec3(0,0,0);
+
+    for (int i = 25; i < PLATFORM_COUNT; i++){
+        state.platforms[i].entityType = WALL;
     }
     
     for (int i = 0; i < PLATFORM_COUNT; i++){
@@ -252,7 +263,7 @@ void ProcessInput() {
                         
                     case SDLK_SPACE:
                         if (state.player->collidedBottom){
-                            state.player->jump = true;
+                            state.player->boost = true;
                         }
                         break;
                 }
@@ -270,7 +281,6 @@ void ProcessInput() {
         state.player->acceleration.x += 1.0f;
     }
     
-
     if (glm::length(state.player->movement) > 1.0f) {
         state.player->movement = glm::normalize(state.player->movement);
     }
@@ -305,10 +315,11 @@ void Update() {
         if (state.player->lastCollided){
             if (state.player->lastCollided == WALL){
                 GLuint font1TextureID = LoadTexture("font.png");
-                DrawText(&program, font1TextureID,"Mission Failed",0.5f, 0.25f, glm::vec3(-4.75f,3.3,0));
+                DrawText(&program, font1TextureID,"Mission Failed",0.5f, 0.25f, glm::vec3(0,0,0));
             }
             if (state.player->lastCollided == LANDING){
-                
+                GLuint font1TextureID = LoadTexture("font.png");
+                DrawText(&program, font1TextureID,"Mission Successful",0.5f, 0.25f, glm::vec3(0,0,0));
             }
             state.isRunning = false;
         }
@@ -325,9 +336,6 @@ void Render() {
         state.player->Render(&program);
         
         SDL_GL_SwapWindow(displayWindow);
-        
-        GLuint font1TextureID = LoadTexture("font.png");
-        DrawText(&program, font1TextureID,"Mission Failed",0.2f, 0.1f, glm::vec3(0,0,0));
     }
 }
 

@@ -93,9 +93,9 @@ void Entity::Update(float deltaTime, Entity* platforms, int platformCount)
     collidedLeft = false;
     collidedRight = false;
     
-    if (jump){
-        jump = false;
-        velocity.y += jumpPower;
+    if (boost){
+        boost = false;
+        velocity.y += boostPower;
     }
     
     velocity.x = movement.x * speed;

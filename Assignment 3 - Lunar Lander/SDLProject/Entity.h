@@ -26,8 +26,8 @@ public:
     float width = 1.0f;
     float height = 1.0f;
     
-    bool jump = false;
-    bool jumpPower = 0;
+    bool boost = false;
+    bool boostPower = 0;
     
     float speed;
     
