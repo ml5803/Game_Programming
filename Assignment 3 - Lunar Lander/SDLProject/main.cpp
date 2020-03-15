@@ -268,6 +268,7 @@ void ProcessInput() {
                     case SDLK_r:
                         state.isRunning = true;
                         state.player->position = glm::vec3(0,3.5,0);
+                        state.player->velocity = glm::vec3(0,0,0);
                         state.player->movement = glm::vec3(0);
                         state.player->acceleration = glm::vec3(0,-0.1f,0);
                         state.player->lastCollided = DUMMY;
