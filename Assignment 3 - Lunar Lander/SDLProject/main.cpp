@@ -21,6 +21,7 @@
 struct GameState {
     Entity *player;
     Entity *platforms;
+    GLuint font1TextureID;
     bool isRunning = true;
 };
 
@@ -149,13 +150,14 @@ void Initialize() {
     state.player->height = 0.4f;
     state.player->width = 0.5f;
     
-    state.player->boostPower = 5.0f;
+    state.player->boostPower = 1.0f;
  
     state.platforms = new Entity[PLATFORM_COUNT];
     
     //make stage
     GLuint platformTextureID = LoadTexture("platformPack_tile040.png");
     GLuint landingTextureID = LoadTexture("platformPack_tile042.png");
+    state.font1TextureID = LoadTexture("font.png");
     
     //left wall
     state.platforms[0].textureID = platformTextureID;
@@ -241,6 +243,9 @@ void Initialize() {
 
 void ProcessInput() {
     
+    if (!state.isRunning){
+        return;
+    }
     state.player->movement = glm::vec3(0);
     
     SDL_Event event;
@@ -262,9 +267,7 @@ void ProcessInput() {
                         break;
                         
                     case SDLK_SPACE:
-                        if (state.player->collidedBottom){
-                            state.player->boost = true;
-                        }
+                        state.player->boost = true;
                         break;
                 }
                 break; // SDL_KEYDOWN
@@ -314,12 +317,10 @@ void Update() {
         //if player's lastCollided isn't null, then game state would be over
         if (state.player->lastCollided){
             if (state.player->lastCollided == WALL){
-                GLuint font1TextureID = LoadTexture("font.png");
-                DrawText(&program, font1TextureID,"Mission Failed",0.5f, 0.25f, glm::vec3(0,0,0));
+                DrawText(&program, state.font1TextureID,"Mission Failed",0.5f, 0.25f, glm::vec3(0,0,0));
             }
             if (state.player->lastCollided == LANDING){
-                GLuint font1TextureID = LoadTexture("font.png");
-                DrawText(&program, font1TextureID,"Mission Successful",0.5f, 0.25f, glm::vec3(0,0,0));
+                DrawText(&program, state.font1TextureID,"Mission Successful",0.5f, 0.25f, glm::vec3(0,0,0));
             }
             state.isRunning = false;
         }
