@@ -242,10 +242,6 @@ void Initialize() {
 }
 
 void ProcessInput() {
-    
-    if (!state.isRunning){
-        return;
-    }
     state.player->movement = glm::vec3(0);
     
     SDL_Event event;
@@ -268,6 +264,13 @@ void ProcessInput() {
                         
                     case SDLK_SPACE:
                         state.player->boost = true;
+                        break;
+                    case SDLK_r:
+                        state.isRunning = true;
+                        state.player->position = glm::vec3(0,3.5,0);
+                        state.player->movement = glm::vec3(0);
+                        state.player->acceleration = glm::vec3(0,-0.1f,0);
+                        state.player->lastCollided = DUMMY;
                         break;
                 }
                 break; // SDL_KEYDOWN
@@ -314,16 +317,6 @@ void Update() {
 
         accumulator = deltaTime;
         
-        //if player's lastCollided isn't null, then game state would be over
-        if (state.player->lastCollided){
-            if (state.player->lastCollided == WALL){
-                DrawText(&program, state.font1TextureID,"Mission Failed",0.5f, 0.25f, glm::vec3(0,0,0));
-            }
-            if (state.player->lastCollided == LANDING){
-                DrawText(&program, state.font1TextureID,"Mission Successful",0.5f, 0.25f, glm::vec3(0,0,0));
-            }
-            state.isRunning = false;
-        }
     }
 }
 
@@ -335,6 +328,16 @@ void Render() {
             state.platforms[i].Render(&program);
         }
         state.player->Render(&program);
+        //if player's lastCollided isn't DUMMY, then game state would be over
+        if (state.player->lastCollided != DUMMY){
+            if (state.player->lastCollided == WALL){
+                DrawText(&program, state.font1TextureID,"Mission Failed",0.5f, 0.05f, glm::vec3(-3.5,1,0));
+            }
+            if (state.player->lastCollided == LANDING){
+                DrawText(&program, state.font1TextureID,"Mission Successful",0.45f, 0.0001f, glm::vec3(-3.8,1,0));
+            }
+            state.isRunning = false;
+        }
         
         SDL_GL_SwapWindow(displayWindow);
     }

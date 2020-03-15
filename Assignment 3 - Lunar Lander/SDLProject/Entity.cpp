@@ -8,6 +8,7 @@ Entity::Entity()
     velocity = glm::vec3(0);
     speed = 0;
     
+    lastCollided = DUMMY;
     modelMatrix = glm::mat4(1.0f);
 }
 

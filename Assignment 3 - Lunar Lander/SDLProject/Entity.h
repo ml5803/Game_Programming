@@ -11,7 +11,7 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "ShaderProgram.h"
 
-enum EntityType {PLAYER,WALL,LANDING};
+enum EntityType {DUMMY,PLAYER,WALL,LANDING};
 
 class Entity {
 public:
