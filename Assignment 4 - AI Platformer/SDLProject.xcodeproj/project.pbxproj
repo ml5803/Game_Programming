@@ -11,6 +11,7 @@
 		4C49207F2429CB79006CACB8 /* george_0.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 4C49207D2429CB56006CACB8 /* george_0.png */; };
 		4C4920802429CB7B006CACB8 /* platformPack_tile001.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 4C49207C2429CB56006CACB8 /* platformPack_tile001.png */; };
 		4C4920812429CB7D006CACB8 /* platformPack_tile004.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 4C49207A2429CB56006CACB8 /* platformPack_tile004.png */; };
+		4C492083242AA7D8006CACB8 /* goomba.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 4C492082242AA560006CACB8 /* goomba.png */; };
 		4CA25634241E8AA600C28F2F /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CA25632241E8AA600C28F2F /* Entity.cpp */; };
 		DBDF1B532323DE3F007CECB1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBDF1B522323DE3F007CECB1 /* main.cpp */; };
 		DBDF1B5E2323DE8D007CECB1 /* ShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBDF1B5D2323DE8D007CECB1 /* ShaderProgram.cpp */; };
@@ -34,6 +35,7 @@
 				4C4920812429CB7D006CACB8 /* platformPack_tile004.png in Copy Files */,
 				4C4920802429CB7B006CACB8 /* platformPack_tile001.png in Copy Files */,
 				4C49207F2429CB79006CACB8 /* george_0.png in Copy Files */,
+				4C492083242AA7D8006CACB8 /* goomba.png in Copy Files */,
 			);
 			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -45,6 +47,7 @@
 		4C49207B2429CB56006CACB8 /* font.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = font.png; sourceTree = "<group>"; };
 		4C49207C2429CB56006CACB8 /* platformPack_tile001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = platformPack_tile001.png; sourceTree = "<group>"; };
 		4C49207D2429CB56006CACB8 /* george_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = george_0.png; sourceTree = "<group>"; };
+		4C492082242AA560006CACB8 /* goomba.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goomba.png; sourceTree = "<group>"; };
 		4CA25632241E8AA600C28F2F /* Entity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
 		4CA25633241E8AA600C28F2F /* Entity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
 		DBDF1B4F2323DE3F007CECB1 /* SDLProject */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SDLProject; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,6 +83,7 @@
 		DBDF1B462323DE3F007CECB1 = {
 			isa = PBXGroup;
 			children = (
+				4C492082242AA560006CACB8 /* goomba.png */,
 				4C49207B2429CB56006CACB8 /* font.png */,
 				4C49207D2429CB56006CACB8 /* george_0.png */,
 				4C49207C2429CB56006CACB8 /* platformPack_tile001.png */,

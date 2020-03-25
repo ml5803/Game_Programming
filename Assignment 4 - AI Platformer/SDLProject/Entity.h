@@ -11,11 +11,16 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "ShaderProgram.h"
 
-enum EntityType {DUMMY,PLAYER,WALL,LANDING};
+enum EntityType {DUMMY,PLAYER,PLATFORM,ENEMY};
+enum AIType {PATROL, CHASE, RUN};
+enum AIState {IDLE, WALKING};
 
 class Entity {
 public:
     EntityType entityType;
+    AIType aiType;
+    AIState aiState;
+    
     EntityType lastCollided;
     
     glm::vec3 position;
@@ -25,6 +30,7 @@ public:
     
     float width = 1.0f;
     float height = 1.0f;
+    float offset = 0.2;
     
     float speed;
     
@@ -36,6 +42,7 @@ public:
     int *animLeft = NULL;
     int *animUp = NULL;
     int *animDown = NULL;
+    int *animWalk = NULL;
 
     int *animIndices = NULL;
     int animFrames = 0;
@@ -50,13 +57,22 @@ public:
     bool collidedBottom=  false;
     bool collidedLeft = false;
     bool collidedRight = false;
+    bool leftCornerContact = false;
+    bool rightCornerContact = false;
     
     Entity();
     
     bool CheckCollision(Entity *other);
     void CheckCollisionsX(Entity *objects, int objectCount);
     void CheckCollisionsY(Entity *objects, int objectCount);
-    void Update(float deltaTime, Entity* platforms, int platformCount);
+    void CheckCollisionPointLeft(Entity* objects, int objectCount);
+    void CheckCollisionPointRight(Entity* objects, int objectCount);
+    void Update(float deltaTime, Entity* player, Entity* enemies, Entity* platforms, int enemyCount, int platformCount);
     void Render(ShaderProgram *program);
     void DrawSpriteFromTextureAtlas(ShaderProgram *program, GLuint textureID, int index);
-};
+    
+    void AI(Entity* player);
+    void AIPatrol(Entity* player);
+    void AIChase(Entity* player);
+    void AIRunner(Entity* player);
+}; 
