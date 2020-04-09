@@ -4,3 +4,4 @@
 2) Assignment 2 - Pong - Laser pong
 3) Assignment 3 - Lunar Lander
 4) Assignment 4 - Rise of the AI - AI Platformer
+5) Assignment 5 - Adventure Time
