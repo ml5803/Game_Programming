@@ -176,11 +176,11 @@ void Entity::Update(float deltaTime, Entity* player, Entity* enemies, Entity* pl
         velocity += acceleration * deltaTime;
     }
     
-    position.x += velocity.x * deltaTime; // Move on X
-    CheckCollisionsX(platforms, platformCount);// Fix if needed
-    
     position.y += velocity.y * deltaTime; // Move on Y
     CheckCollisionsY(platforms, platformCount);// Fix if needed
+    
+    position.x += velocity.x * deltaTime; // Move on X
+    CheckCollisionsX(platforms, platformCount);// Fix if needed
 
     //fix bounds to never leave the screen...
     if (position.x > 4.7){
