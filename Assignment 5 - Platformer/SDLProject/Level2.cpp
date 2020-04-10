@@ -53,15 +53,15 @@ void Level2::Initialize() {
     state.enemies = new Entity[ENEMY_COUNT];
     
     //patrol
-    state.enemies[0].position = glm::vec3(7,-3,0);
+    state.enemies[0].position = glm::vec3(7,-4,0);
     state.enemies[0].aiType = PATROL;
     state.enemies[0].aiState = WALKING;
-    state.enemies[0].movement = glm::vec3(-1,0,0);
+    state.enemies[0].movement = glm::vec3(1,0,0);
     
     //chaser
-    state.enemies[1].position = glm::vec3(12,-1,0);
+    state.enemies[1].position = glm::vec3(12,-3,0);
     state.enemies[1].aiType = CHASE;
-    state.enemies[1].aiState = WALKING;
+    state.enemies[1].aiState = IDLE;
     
     for (int i = 0; i < ENEMY_COUNT; i++){
         state.enemies[i].acceleration = glm::vec3(0,-10.0f,0);
@@ -121,16 +121,15 @@ void Level2::Render(ShaderProgram *program) {
     
     float textOffset;
     if (state.player->position.x < 5){
-        textOffset = 0;
+       textOffset = 0;
     }else if (state.player->position.x >= 5 && state.player->position.x <= 10){
-        textOffset = state.player->position.x-5;
+       textOffset = state.player->position.x-5;
     }else{
-        textOffset = 5;
+       textOffset = 5;
     }
-    
     Util::DrawText(program, fontTextureID,"Lives: " + std::to_string(state.lives),0.3f, 0.0f, glm::vec3(0.75+textOffset,-.5,0));
     
     if (state.lives <= 0){
-        Util::DrawText(program, fontTextureID,"You lose :(..." ,0.45f, 0.0f, glm::vec3(state.player->position.x-2,-2.5,0));
+        Util::DrawText(program, fontTextureID,"You lose :(..." ,0.45f, 0.0f, glm::vec3(2.5+textOffset,-1,0));
     }
 }

@@ -21,6 +21,7 @@ struct GameState {
     Entity *enemies;
     int lives = 3;
     int nextScene = -1;
+    bool win;
 };
 
 class Scene {

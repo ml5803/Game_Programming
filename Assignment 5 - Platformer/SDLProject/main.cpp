@@ -48,8 +48,6 @@ void Initialize() {
     
     program.Load("shaders/vertex_textured.glsl", "shaders/fragment_textured.glsl");
     
-    
-    
     modelMatrix = glm::mat4(1.0f);
     projectionMatrix = glm::ortho(-5.0f, 5.0f, -3.75f, 3.75f, -1.0f, 1.0f);
     
@@ -79,34 +77,45 @@ void ProcessInput() {
                 gameIsRunning = false;
                 break;
                 
+            //only allow movement if game is running
             case SDL_KEYDOWN:
                 switch (event.key.keysym.sym) {
                     case SDLK_LEFT:
                         // Move the player left
-                        currentScene->state.player->animIndices = currentScene->state.player->animLeft;
+                        if (!currentScene->state.win){
+                           currentScene->state.player->animIndices = currentScene->state.player->animLeft;
+                        }
                         break;
                     case SDLK_RIGHT:
                         // Move the player right
-                        currentScene->state.player->animIndices = currentScene->state.player->animRight;
+                        if (!currentScene->state.win){
+                          currentScene->state.player->animIndices = currentScene->state.player->animRight;
+                        }
                         break;
                     case SDLK_SPACE:
                         //only jump if on a platform
-                        if (currentScene->state.player->collidedBottom){
-                            currentScene->state.player->velocity.y = 7.0f;
+                        if (!currentScene->state.win){
+                            if (currentScene->state.player->collidedBottom){
+                              currentScene->state.player->velocity.y = 7.0f;
+                            }
+                            break;
                         }
-                        break;
                 }
                 break; // SDL_KEYDOWN
         }
     }
     
+    //only allow movement if I didn't win yet.
+    if (currentScene->state.win){
+        return;
+    }
     const Uint8 *keys = SDL_GetKeyboardState(NULL);
 
     if (keys[SDL_SCANCODE_LEFT]) {
         currentScene->state.player->movement.x = -1.0f;
     }
     else if (keys[SDL_SCANCODE_RIGHT]) {
-       currentScene->state.player->movement.x = 1.0f;
+        currentScene->state.player->movement.x = 1.0f;
     }
 }
 
@@ -156,6 +165,8 @@ int main(int argc, char* argv[]) {
         Update();
         
         if (currentScene->state.nextScene >= 0){
+            //lives shared across scenes
+            sceneList[currentScene->state.nextScene]->state.lives = currentScene->state.lives;
             SwitchToScene(sceneList[currentScene->state.nextScene]);
         }
         

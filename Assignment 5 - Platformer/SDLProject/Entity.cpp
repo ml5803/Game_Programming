@@ -13,8 +13,8 @@ Entity::Entity()
 
 bool Entity::CheckCollision(Entity *other)
 {
-    //can't collide with self or something that isn't active
-    if (isActive == false || other->isActive == false || other == this){
+    //can't collide with self or something that isn't active or with same entityType
+    if (isActive == false || other->isActive == false || other == this || this->entityType == other->entityType){
         return false;
     }
     
@@ -26,7 +26,7 @@ bool Entity::CheckCollision(Entity *other)
     float xdist = fabs(position.x - other->position.x) - ((width + other->width)/2.0f);
     float ydist = fabs(position.y - other->position.y) - ((height + other->height)/2.0f);
     
-    if (xdist <= 0.05 && ydist <= 0.5){
+    if (xdist <= 0.05 && ydist <= 0.05){
         //detected a collision
         lastCollided = other->entityType;
         return true;
@@ -37,26 +37,27 @@ bool Entity::CheckCollision(Entity *other)
 
 void Entity::CheckCollisionsX(Entity *objects, int objectCount)
 {
-     for (int i = 0; i < objectCount; i++)
-     {
-         Entity *object = &objects[i];
-
-             if (CheckCollision(object))
-             {
-                 float xdist = fabs(position.x - object->position.x);
-                 float penetrationX = fabs(xdist - (width / 2.0f) - (object->width / 2.0f));
-                 if (velocity.x > 0) {
-                     position.x -= penetrationX;
-                     velocity.x = 0;
-                     collidedRight = true;
-                 }
-                 else if (velocity.x < 0) {
-                     position.x += penetrationX;
-                     velocity.x = 0;
-                     collidedLeft = true;
-                 }
-         }
-     }
+    for (int i = 0; i < objectCount; i++)
+    {
+        Entity *object = &objects[i];
+        if (CheckCollision(object))
+        {
+            float xdist = fabs(position.x - object->position.x);
+            float penetrationX = fabs(xdist - (width / 2.0f) - (object->width / 2.0f));
+            if (velocity.x > 0) {
+                 position.x -= penetrationX;
+                 velocity.x = 0;
+                 collidedRight = true;
+            }
+            else if (velocity.x < 0)
+            {
+                 position.x += penetrationX;
+                 velocity.x = 0;
+                 collidedLeft = true;
+            }
+            break;
+        }
+    }
 }
 
 void Entity::CheckCollisionsX(Map *map)
@@ -99,6 +100,7 @@ void Entity::CheckCollisionsY(Entity *objects, int objectCount)
                  velocity.y = 0;
                  collidedBottom = true;
              }
+             break;
          }
      }
 }
@@ -325,6 +327,10 @@ void Entity::AIChase(Entity* player){
         aiState = IDLE;
     }
     
+    if (aiState == IDLE){
+        movement = glm::vec3(0);
+    }
+    
     if (aiState == WALKING){
         //jump if player on a higher platform and you are a platform,
         //either you touched a wall or you approached a gap
@@ -351,6 +357,10 @@ void Entity::AIChase(Entity* player){
     
 
 void Entity::AIRunner(Entity* player){
+    if (aiState == IDLE){
+        movement = glm::vec3(0);
+    }
+    
     if (glm::distance(position, player->position) < 2.5f){ //don't move until player is close enough
         aiState = WALKING;
     }
@@ -363,8 +373,11 @@ void Entity::AIRunner(Entity* player){
         }
         
         if(glm::distance(position, player->position) > 3.0f){
-            movement = glm::vec3(0);
             aiState = IDLE;
+        }
+        
+        if (collidedLeft || collidedRight){
+            velocity.y = 5;
         }
     }
 }

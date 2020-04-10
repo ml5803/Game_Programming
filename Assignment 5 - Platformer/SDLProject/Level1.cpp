@@ -109,16 +109,16 @@ void Level1::Render(ShaderProgram *program) {
     
     float textOffset;
     if (state.player->position.x < 5){
-        textOffset = 0;
+       textOffset = 0;
     }else if (state.player->position.x >= 5 && state.player->position.x <= 10){
-        textOffset = state.player->position.x-5;
+       textOffset = state.player->position.x-5;
     }else{
-        textOffset = 5;
+       textOffset = 5;
     }
     
     Util::DrawText(program, fontTextureID,"Lives: " + std::to_string(state.lives),0.3f, 0.0f, glm::vec3(0.75+textOffset,-.5,0));
     
     if (state.lives <= 0){
-        Util::DrawText(program, fontTextureID,"You lose :(..." ,0.45f, 0.0f, glm::vec3(state.player->position.x-2,-2.5,0));
+        Util::DrawText(program, fontTextureID,"You lose :(..." ,0.45f, 0.0f, glm::vec3(2.5+textOffset,-1,0));
     }
 }
