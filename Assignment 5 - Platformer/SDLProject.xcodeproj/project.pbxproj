@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		4C49207E2429CB77006CACB8 /* font.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 4C49207B2429CB56006CACB8 /* font.png */; };
 		4C49207F2429CB79006CACB8 /* george_0.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 4C49207D2429CB56006CACB8 /* george_0.png */; };
-		4C4920802429CB7B006CACB8 /* platformPack_tile001.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 4C49207C2429CB56006CACB8 /* platformPack_tile001.png */; };
-		4C4920812429CB7D006CACB8 /* platformPack_tile004.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 4C49207A2429CB56006CACB8 /* platformPack_tile004.png */; };
 		4C492083242AA7D8006CACB8 /* goomba.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 4C492082242AA560006CACB8 /* goomba.png */; };
 		4C64986E243E7B6C00FCFB5E /* tileset.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 4C64986D243E7B5700FCFB5E /* tileset.png */; };
 		4C649877243E7D9E00FCFB5E /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C649876243E7D9E00FCFB5E /* Map.cpp */; };
@@ -20,6 +18,7 @@
 		4C649884243EC67800FCFB5E /* Level2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C649883243EC67800FCFB5E /* Level2.cpp */; };
 		4C649886243ED2A300FCFB5E /* Menu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C649885243ED2A300FCFB5E /* Menu.cpp */; };
 		4C649889243ED42100FCFB5E /* Level3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C649888243ED42100FCFB5E /* Level3.cpp */; };
+		4C64988E2440046600FCFB5E /* tileset2.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 4C64988D2440046100FCFB5E /* tileset2.png */; };
 		4CA25634241E8AA600C28F2F /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CA25632241E8AA600C28F2F /* Entity.cpp */; };
 		DBDF1B532323DE3F007CECB1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBDF1B522323DE3F007CECB1 /* main.cpp */; };
 		DBDF1B5E2323DE8D007CECB1 /* ShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBDF1B5D2323DE8D007CECB1 /* ShaderProgram.cpp */; };
@@ -40,11 +39,10 @@
 			files = (
 				DBDF1B612323DE9E007CECB1 /* shaders in Copy Files */,
 				4C49207E2429CB77006CACB8 /* font.png in Copy Files */,
-				4C4920812429CB7D006CACB8 /* platformPack_tile004.png in Copy Files */,
-				4C4920802429CB7B006CACB8 /* platformPack_tile001.png in Copy Files */,
 				4C64986E243E7B6C00FCFB5E /* tileset.png in Copy Files */,
 				4C49207F2429CB79006CACB8 /* george_0.png in Copy Files */,
 				4C492083242AA7D8006CACB8 /* goomba.png in Copy Files */,
+				4C64988E2440046600FCFB5E /* tileset2.png in Copy Files */,
 			);
 			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -52,9 +50,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		4C49207A2429CB56006CACB8 /* platformPack_tile004.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = platformPack_tile004.png; sourceTree = "<group>"; };
 		4C49207B2429CB56006CACB8 /* font.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = font.png; sourceTree = "<group>"; };
-		4C49207C2429CB56006CACB8 /* platformPack_tile001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = platformPack_tile001.png; sourceTree = "<group>"; };
 		4C49207D2429CB56006CACB8 /* george_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = george_0.png; sourceTree = "<group>"; };
 		4C492082242AA560006CACB8 /* goomba.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goomba.png; sourceTree = "<group>"; };
 		4C64986D243E7B5700FCFB5E /* tileset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tileset.png; sourceTree = "<group>"; };
@@ -72,6 +68,7 @@
 		4C649887243ED2B200FCFB5E /* Menu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Menu.h; sourceTree = "<group>"; };
 		4C649888243ED42100FCFB5E /* Level3.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Level3.cpp; sourceTree = "<group>"; };
 		4C64988A243ED42E00FCFB5E /* Level3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Level3.h; sourceTree = "<group>"; };
+		4C64988D2440046100FCFB5E /* tileset2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tileset2.png; sourceTree = "<group>"; };
 		4CA25632241E8AA600C28F2F /* Entity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
 		4CA25633241E8AA600C28F2F /* Entity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
 		DBDF1B4F2323DE3F007CECB1 /* SDLProject */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SDLProject; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,11 +105,10 @@
 			isa = PBXGroup;
 			children = (
 				4C64986D243E7B5700FCFB5E /* tileset.png */,
+				4C64988D2440046100FCFB5E /* tileset2.png */,
 				4C492082242AA560006CACB8 /* goomba.png */,
 				4C49207B2429CB56006CACB8 /* font.png */,
 				4C49207D2429CB56006CACB8 /* george_0.png */,
-				4C49207C2429CB56006CACB8 /* platformPack_tile001.png */,
-				4C49207A2429CB56006CACB8 /* platformPack_tile004.png */,
 				DBDF1B512323DE3F007CECB1 /* SDLProject */,
 				DBDF1B502323DE3F007CECB1 /* Products */,
 				DBDF1B5F2323DE92007CECB1 /* Frameworks */,

@@ -92,7 +92,7 @@ void ProcessInput() {
                     case SDLK_SPACE:
                         //only jump if on a platform
                         if (currentScene->state.player->collidedBottom){
-                            currentScene->state.player->velocity.y = 5.0f;
+                            currentScene->state.player->velocity.y = 7.0f;
                         }
                         break;
                 }

@@ -22,7 +22,7 @@ public:
     AIType aiType;
     AIState aiState;
     
-    EntityType lastCollided;
+    EntityType lastCollided = DUMMY;
     
     glm::vec3 position;
     glm::vec3 movement;
@@ -58,8 +58,8 @@ public:
     bool collidedBottom=  false;
     bool collidedLeft = false;
     bool collidedRight = false;
-    bool leftCornerContact = false;
-    bool rightCornerContact = false;
+    bool collidedTopLeft, collidedTopRight;
+    bool collidedBottomLeft, collidedBottomRight;
     
     Entity();
     
@@ -71,7 +71,7 @@ public:
 
     void CheckCollisionPointLeft(Entity* objects, int objectCount);
     void CheckCollisionPointRight(Entity* objects, int objectCount);
-    void Update(float deltaTime, Entity* player, Entity* objects, int objectCount, Map* map);
+    void Update(float deltaTime, Entity* player, Entity* objects, int objectCount, Map* map, int* lives);
     void Render(ShaderProgram *program);
     void DrawSpriteFromTextureAtlas(ShaderProgram *program, GLuint textureID, int index);
     

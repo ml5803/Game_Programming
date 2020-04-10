@@ -49,7 +49,7 @@ void Level3::Initialize() {
     state.map = new Map(LEVEL3_WIDTH, LEVEL3_HEIGHT, level3_data, mapTextureID, 1.0f, 4, 1);
 }
 void Level3::Update(float deltaTime) {
-    state.player->Update(deltaTime, state.player, state.enemies, ENEMY_COUNT, state.map);
+    state.player->Update(deltaTime, state.player, state.enemies, ENEMY_COUNT, state.map, &state.lives);
     std::cout << "Level3 \n";
 }
 void Level3::Render(ShaderProgram *program) {

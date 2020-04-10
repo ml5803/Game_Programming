@@ -51,8 +51,7 @@ void Menu::Initialize() {
     fontTextureID = Util::LoadTexture("font.png");
 }
 void Menu::Update(float deltaTime) {
-    state.player->Update(deltaTime, state.player, state.enemies, ENEMY_COUNT, state.map);
-    std::cout << SDLK_RETURN << std::endl;
+    state.player->Update(deltaTime, state.player, state.enemies, ENEMY_COUNT, state.map, &state.lives);
     
     //check if enter is pressed
     const Uint8 *keys = SDL_GetKeyboardState(NULL);

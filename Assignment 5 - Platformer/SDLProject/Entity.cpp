@@ -13,73 +13,26 @@ Entity::Entity()
 
 bool Entity::CheckCollision(Entity *other)
 {
-    if (isActive == false || other->isActive == false){
+    //can't collide with self or something that isn't active
+    if (isActive == false || other->isActive == false || other == this){
         return false;
     }
     
-    //we don't want to check for collision from a wall or landingpad view, will check from player
-    if (entityType == PLATFORM){
+    //we don't want to check for collision from a wall, will check from player or enemy
+    if (entityType == PLATFORM || entityType == DUMMY){
         return false;
     }
     
     float xdist = fabs(position.x - other->position.x) - ((width + other->width)/2.0f);
     float ydist = fabs(position.y - other->position.y) - ((height + other->height)/2.0f);
     
-    if (xdist < 0 && ydist < 0){
+    if (xdist <= 0.05 && ydist <= 0.5){
         //detected a collision
         lastCollided = other->entityType;
         return true;
     }
     
     return false;
-}
-
-void Entity::CheckCollisionPointLeft(Entity* objects, int objectCount){
-    float leftCornerX;
-    float leftCornerY;
-    
-    leftCornerX = position.x - (width/2) - offset;
-    leftCornerY = position.y - (height/2) - offset;
-    
-    for (int i = 0; i < objectCount; i++)
-    {
-        Entity *object = &objects[i];
-        float maxX = object->position.x + (object->width)/2;
-        float minX = object->position.x - (object->width)/2;
-        float maxY = object->position.y + (object->height)/2;
-        float minY = object->position.y - (object->height)/2;
-    
-        //if leftCornerX is between X's and leftCornerY is between Y's, that point is in bounds
-        
-        if (leftCornerX >= minX && leftCornerX <= maxX){
-            if (leftCornerY >= minY && leftCornerY <= maxY){
-                leftCornerContact = true;
-            }
-        }
-    }
-}
-
-void Entity::CheckCollisionPointRight(Entity* objects, int objectCount){
-    float rightCornerX;
-    float rightCornerY;
-    
-    rightCornerX = position.x + (width/2) + offset;
-    rightCornerY = position.y - (height/2) - offset;
-    for (int i = 0; i < objectCount; i++)
-    {
-        Entity *object = &objects[i];
-        float maxX = object->position.x + (object->width)/2;
-        float minX = object->position.x - (object->width)/2;
-        float maxY = object->position.y + (object->height)/2;
-        float minY = object->position.y - (object->height)/2;
-    
-        //if rightCornerX is between X's and rightCornerY is between Y's, that point is in bounds
-        if (rightCornerX >= minX && rightCornerX <= maxX){
-            if (rightCornerY >= minY && rightCornerY <= maxY){
-                rightCornerContact = true;
-            }
-        }
-    }
 }
 
 void Entity::CheckCollisionsX(Entity *objects, int objectCount)
@@ -167,47 +120,49 @@ void Entity::CheckCollisionsY(Map *map)
         position.y -= penetration_y;
         velocity.y = 0;
         collidedTop = true;
+        lastCollided = PLATFORM;
     }
     else if (map->IsSolid(top_left, &penetration_x, &penetration_y) && velocity.y > 0) {
         position.y -= penetration_y;
         velocity.y = 0;
         collidedTop = true;
+        collidedTopLeft = true;
+        lastCollided = PLATFORM;
     }
     else if (map->IsSolid(top_right, &penetration_x, &penetration_y) && velocity.y > 0) {
         position.y -= penetration_y;
         velocity.y = 0;
         collidedTop = true;
+        collidedTopRight = true;
+        lastCollided = PLATFORM;
     }
     
     if (map->IsSolid(bottom, &penetration_x, &penetration_y) && velocity.y < 0) {
         position.y += penetration_y;
         velocity.y = 0;
         collidedBottom = true;
+        lastCollided = PLATFORM;
     }
     else if (map->IsSolid(bottom_left, &penetration_x, &penetration_y) && velocity.y < 0) {
         position.y += penetration_y;
         velocity.y = 0;
         collidedBottom = true;
+        collidedBottomLeft = true;
+        lastCollided = PLATFORM;
     }
     else if (map->IsSolid(bottom_right, &penetration_x, &penetration_y) && velocity.y < 0) {
         position.y += penetration_y;
         velocity.y = 0;
         collidedBottom = true;
+        collidedBottomRight = true;
+        lastCollided = PLATFORM;
     }
 }
 
-void Entity::Update(float deltaTime, Entity* player, Entity* objects, int objectCount, Map* map)
+void Entity::Update(float deltaTime, Entity* player, Entity* objects, int objectCount, Map* map, int *lives)
 {
     if (isActive == false){
         return;
-    }
-    
-    //check if approaching a cliff
-    //CheckCollisionPointLeft(platforms, platformCount);
-    //CheckCollisionPointRight(platforms, platformCount);
-    
-    if (entityType == ENEMY){
-        AI(player);
     }
     
     //animations if needed
@@ -229,13 +184,14 @@ void Entity::Update(float deltaTime, Entity* player, Entity* objects, int object
        }
    }
     
-    //if player
     collidedTop = false;
+    collidedTopLeft = false;
+    collidedTopRight = false;
     collidedBottom = false;
+    collidedBottomLeft = false;
+    collidedBottomRight = false;
     collidedLeft = false;
     collidedRight = false;
-    leftCornerContact = false;
-    rightCornerContact = false;
     
     velocity.x = movement.x * speed;
     //only count acceleration when you in air aka collidedBottom is false
@@ -251,14 +207,28 @@ void Entity::Update(float deltaTime, Entity* player, Entity* objects, int object
     CheckCollisionsX(map);
     CheckCollisionsX(objects, objectCount);// Fix if needed
     
+    if (entityType == ENEMY){
+//        std::cout << "top    " << collidedTopLeft << collidedTop << collidedTopRight << std::endl;
+//        std::cout << "middle " << collidedLeft << collidedRight << std::endl;
+//        std::cout << "bottom " << collidedBottomLeft << collidedBottom << collidedBottomRight << std::endl;
+//        std::cout << "last collided " << lastCollided << std::endl;
+        AI(player);
+    }
+    
     //if enemy check collisions
     if (entityType == ENEMY){
-        if(CheckCollision(player) && player->position.y >= position.y +0.3){ //if I touch the player and he is higher, he stepped on my head
+        if(CheckCollision(player) && player->position.y >= position.y + 0.5f){ //if I touch the player and he is higher, he stepped on my head
+            player->velocity.y = 5;
             isActive = false;
-            player->velocity.y = 3.0f;
         }else if (CheckCollision(player)){
-            player->isActive = false;
+            *lives -= 1;
+            isActive = false;
         }
+    }
+    
+    //if player runs out of lives, deactivate player
+    if (entityType == PLAYER && *lives <= 0){
+        isActive = false;
     }
     
     modelMatrix = glm::mat4(1.0f);
@@ -337,22 +307,28 @@ void Entity::AI(Entity* player){
 }
 
 void Entity::AIPatrol(Entity* player){
-    //gap on the left side
-    if(!leftCornerContact){
+    //wall on left
+    if(collidedLeft){
         movement = glm::vec3(1,0,0);
     }
-    
-    //gap on the right side
-    if(!rightCornerContact){
+    //wall on right
+    if(collidedRight){
         movement = glm::vec3(-1,0,0);
     }
 }
 
 void Entity::AIChase(Entity* player){
+    
+    if (glm::distance(position, player->position) < 4.0f){ //don't move until player is close enough
+        aiState = WALKING;
+    }else{
+        aiState = IDLE;
+    }
+    
     if (aiState == WALKING){
         //jump if player on a higher platform and you are a platform,
         //either you touched a wall or you approached a gap
-        if ((player->position.y > position.y && collidedBottom) && (collidedLeft || collidedRight || !leftCornerContact || !rightCornerContact)){
+        if ((player->position.y > position.y && collidedBottom) && (collidedLeft || collidedRight)){
             velocity.y = 7.0f;
         }
         //temporarily increase in speed while in air
