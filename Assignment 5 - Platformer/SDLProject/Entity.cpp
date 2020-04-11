@@ -18,8 +18,8 @@ bool Entity::CheckCollision(Entity *other)
         return false;
     }
     
-    //we don't want to check for collision from a wall, will check from player or enemy
-    if (entityType == PLATFORM || entityType == DUMMY){
+    //we don't want to check for collision from a wall or enemy, will check from player
+    if (entityType == PLATFORM || entityType == DUMMY || entityType == ENEMY){
         return false;
     }
     
@@ -29,6 +29,7 @@ bool Entity::CheckCollision(Entity *other)
     if (xdist <= 0.05 && ydist <= 0.05){
         //detected a collision
         lastCollided = other->entityType;
+        lastCollidedEntity = other;
         return true;
     }
     
@@ -54,6 +55,7 @@ void Entity::CheckCollisionsX(Entity *objects, int objectCount)
                  position.x += penetrationX;
                  velocity.x = 0;
                  collidedLeft = true;
+                 lastCollidedEntity = object;
             }
             break;
         }
@@ -100,7 +102,6 @@ void Entity::CheckCollisionsY(Entity *objects, int objectCount)
                  velocity.y = 0;
                  collidedBottom = true;
              }
-             break;
          }
      }
 }
@@ -163,6 +164,15 @@ void Entity::CheckCollisionsY(Map *map)
 
 void Entity::Update(float deltaTime, Entity* player, Entity* objects, int objectCount, Map* map, int *lives)
 {
+    if(entityType == PLAYER){
+        std::cout << "top    " << collidedTopLeft << collidedTop << collidedTopRight << std::endl;
+        std::cout << "middle " << collidedLeft << " " << collidedRight << std::endl;
+        std::cout << "bottom " << collidedBottomLeft << collidedBottom << collidedBottomRight << std::endl;
+        if (lastCollided == ENEMY && lastCollidedEntity != nullptr){
+            std::cout << lastCollidedEntity->entityType << std::endl;
+        }
+    }
+    
     if (isActive == false){
         return;
     }
@@ -210,21 +220,25 @@ void Entity::Update(float deltaTime, Entity* player, Entity* objects, int object
     CheckCollisionsX(objects, objectCount);// Fix if needed
     
     if (entityType == ENEMY){
-//        std::cout << "top    " << collidedTopLeft << collidedTop << collidedTopRight << std::endl;
-//        std::cout << "middle " << collidedLeft << collidedRight << std::endl;
-//        std::cout << "bottom " << collidedBottomLeft << collidedBottom << collidedBottomRight << std::endl;
-//        std::cout << "last collided " << lastCollided << std::endl;
         AI(player);
     }
     
-    //if enemy check collisions
-    if (entityType == ENEMY){
-        if(CheckCollision(player) && player->position.y >= position.y + 0.5f){ //if I touch the player and he is higher, he stepped on my head
-            player->velocity.y = 5;
-            isActive = false;
-        }else if (CheckCollision(player)){
-            *lives -= 1;
-            isActive = false;
+    //if player check collisions
+    if (entityType == PLAYER){
+        if (lastCollided == ENEMY && lastCollidedEntity != nullptr){
+            if (collidedBottom && position.y >= lastCollidedEntity->position.y){
+                lastCollidedEntity->isActive = false;
+                lastCollidedEntity = nullptr;
+                lastCollided = PLATFORM;
+                velocity.y = 5;
+            }else{
+                *lives -=1;
+                lastCollidedEntity->isActive = false;
+                std::cout << "SEPPUKKU" << std::endl;
+                lastCollidedEntity = nullptr;
+                velocity.y = 3;
+                lastCollided = PLATFORM;
+            }
         }
     }
     

@@ -22,7 +22,8 @@ public:
     AIType aiType;
     AIState aiState;
     
-    EntityType lastCollided = DUMMY;
+    EntityType lastCollided;
+    Entity* lastCollidedEntity;
     
     glm::vec3 position;
     glm::vec3 movement;
