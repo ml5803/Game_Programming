@@ -7,6 +7,7 @@
 
 #define GL_GLEXT_PROTOTYPES 1
 #include <SDL.h>
+#include <SDL_mixer.h>
 #include <SDL_opengl.h>
 #include "glm/mat4x4.hpp"
 #include "glm/gtc/matrix_transform.hpp"
@@ -22,6 +23,8 @@ struct GameState {
     int lives = 3;
     int nextScene = -1;
     bool win;
+    Mix_Music *musicList[3];
+    Mix_Chunk *soundList[2];
 };
 
 class Scene {

@@ -19,6 +19,11 @@
 		4C649886243ED2A300FCFB5E /* Menu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C649885243ED2A300FCFB5E /* Menu.cpp */; };
 		4C649889243ED42100FCFB5E /* Level3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C649888243ED42100FCFB5E /* Level3.cpp */; };
 		4C64988E2440046600FCFB5E /* tileset2.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 4C64988D2440046100FCFB5E /* tileset2.png */; };
+		4C9EE94824425E6E00FBC183 /* New Hero in Town.mp3 in Copy Files */ = {isa = PBXBuildFile; fileRef = 4C9EE94724425E5100FBC183 /* New Hero in Town.mp3 */; };
+		4C9EE94924425E7200FBC183 /* Blippy Trance.mp3 in Copy Files */ = {isa = PBXBuildFile; fileRef = 4C9EE94524425E4800FBC183 /* Blippy Trance.mp3 */; };
+		4C9EE94A24425E7500FBC183 /* Circus of Freaks.mp3 in Copy Files */ = {isa = PBXBuildFile; fileRef = 4C9EE94624425E4D00FBC183 /* Circus of Freaks.mp3 */; };
+		4C9EE94C2442613500FBC183 /* jump.wav in Copy Files */ = {isa = PBXBuildFile; fileRef = 4C9EE94B2442612D00FBC183 /* jump.wav */; };
+		4C9EE95024426CEA00FBC183 /* hurt.wav in Copy Files */ = {isa = PBXBuildFile; fileRef = 4C9EE94F24426CE500FBC183 /* hurt.wav */; };
 		4CA25634241E8AA600C28F2F /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CA25632241E8AA600C28F2F /* Entity.cpp */; };
 		DBDF1B532323DE3F007CECB1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBDF1B522323DE3F007CECB1 /* main.cpp */; };
 		DBDF1B5E2323DE8D007CECB1 /* ShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBDF1B5D2323DE8D007CECB1 /* ShaderProgram.cpp */; };
@@ -43,6 +48,11 @@
 				4C49207F2429CB79006CACB8 /* george_0.png in Copy Files */,
 				4C492083242AA7D8006CACB8 /* goomba.png in Copy Files */,
 				4C64988E2440046600FCFB5E /* tileset2.png in Copy Files */,
+				4C9EE94824425E6E00FBC183 /* New Hero in Town.mp3 in Copy Files */,
+				4C9EE94924425E7200FBC183 /* Blippy Trance.mp3 in Copy Files */,
+				4C9EE94A24425E7500FBC183 /* Circus of Freaks.mp3 in Copy Files */,
+				4C9EE94C2442613500FBC183 /* jump.wav in Copy Files */,
+				4C9EE95024426CEA00FBC183 /* hurt.wav in Copy Files */,
 			);
 			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -69,6 +79,11 @@
 		4C649888243ED42100FCFB5E /* Level3.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Level3.cpp; sourceTree = "<group>"; };
 		4C64988A243ED42E00FCFB5E /* Level3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Level3.h; sourceTree = "<group>"; };
 		4C64988D2440046100FCFB5E /* tileset2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tileset2.png; sourceTree = "<group>"; };
+		4C9EE94524425E4800FBC183 /* Blippy Trance.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Blippy Trance.mp3"; sourceTree = "<group>"; };
+		4C9EE94624425E4D00FBC183 /* Circus of Freaks.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Circus of Freaks.mp3"; sourceTree = "<group>"; };
+		4C9EE94724425E5100FBC183 /* New Hero in Town.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "New Hero in Town.mp3"; sourceTree = "<group>"; };
+		4C9EE94B2442612D00FBC183 /* jump.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jump.wav; sourceTree = "<group>"; };
+		4C9EE94F24426CE500FBC183 /* hurt.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hurt.wav; sourceTree = "<group>"; };
 		4CA25632241E8AA600C28F2F /* Entity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
 		4CA25633241E8AA600C28F2F /* Entity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
 		DBDF1B4F2323DE3F007CECB1 /* SDLProject */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SDLProject; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -104,6 +119,11 @@
 		DBDF1B462323DE3F007CECB1 = {
 			isa = PBXGroup;
 			children = (
+				4C9EE94724425E5100FBC183 /* New Hero in Town.mp3 */,
+				4C9EE94524425E4800FBC183 /* Blippy Trance.mp3 */,
+				4C9EE94624425E4D00FBC183 /* Circus of Freaks.mp3 */,
+				4C9EE94B2442612D00FBC183 /* jump.wav */,
+				4C9EE94F24426CE500FBC183 /* hurt.wav */,
 				4C64986D243E7B5700FCFB5E /* tileset.png */,
 				4C64988D2440046100FCFB5E /* tileset2.png */,
 				4C492082242AA560006CACB8 /* goomba.png */,
