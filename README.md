@@ -5,3 +5,4 @@
 3) Assignment 3 - Lunar Lander
 4) Assignment 4 - Rise of the AI - AI Platformer
 5) Assignment 5 - Adventure Time
+6) Assignment 6 - Peahead
